@@ -40,7 +40,7 @@ $$\lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} \leq 1$$
 Para inserir uma animação, use `md ;` seguido do nome de uma pasta onde as
 imagens estão. Essa pasta também deve estar em *img*.
 
-;bubble
+;bucket
 
 Você também pode inserir código, inclusive especificando a linguagem.
 
