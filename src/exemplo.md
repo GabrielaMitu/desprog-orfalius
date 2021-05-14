@@ -5,10 +5,18 @@ Ideia Geral do Algoritmo
 ---------
 
 Um algoritmo de classificação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
-Existem muitos algoritmos de classificação diferentes, com vários prós e contras. Nesse Handout iremos focar no algoritmo Bucket Sort
+Existem muitos algoritmos de classificação diferentes, com vários prós e contras. Nesse Handout iremos focar no algoritmo Bucket Sort.
 
+Antes de pensar em como o algoritmo funciona, vamos começar com algo mais simples: 
+porque será que o algoritmo se chama Bucket Sort? O que ele tem a ver com baldes?
 
-Vamos começar imaginando uma situação hipotética
+![](bucket.jpg)
+
+Baldes são recipientes, em que se pode botar tanto liquidos como sólidos então no 
+caso do algoritmo vamos usar diversos baldes para botar o que formos organizar.
+
+Vamos começar imaginando uma situação hipotética:
+
 Um belo dia, você encontrou um jogo de **Bingo** e resolveu ordenar as bolas em ordem crescente para armazená-las de forma organizada. No jogo existem 75 bolas. Ordená-las diretamente levaria muito tempo, mas você percebeu que tinha 5 pequenos baldes à disposição.
 
 
@@ -29,7 +37,16 @@ Desse modo, ao final teríamos apenas que organizar os baldes individualmente. C
 ???
 
 
-Essa é a ideia fundamental do Bucket Sort. A entrada a ser ordenada, um array, é dividida em intervalos (os chamados “baldes” ou "buckets"), que, então, são ordenados separadamente e, após concatenados, resultam na saída, correspondente ao array de entrada agora ordenado.
+E essa é a ideia fundamental do Bucket Sort. 
+Então ideal pra nossa entrada é que ela tenha:
+
+* Intervalo conhecido;
+
+* ter sido feita com distribuição uniforme
+
+O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
+
+Essa distribuição uniforme é interessante porque ela ajuda que os elementos estejam bem distribuidos entre os baldes que evita que a organização de um balde seja muito mais trabalhosa que outro balde. 
 
 Funcionamento em detalhes
 ---------
