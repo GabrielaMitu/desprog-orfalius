@@ -46,18 +46,29 @@ Então ideal pra nossa entrada é que ela tenha:
 
 O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
 
-Essa distribuição uniforme é interessante porque ela ajuda que os elementos estejam bem distribuidos entre os baldes que evita que a organização de um balde seja muito mais trabalhosa que outro balde. 
+Essa distribuição uniforme é interessante porque ela ajuda que os elementos estejam bem distribuidos entre os baldes que evita que a organização de um balde seja muito mais trabalhosa que outro balde.
 
 Funcionamento em detalhes
 ---------
-O mais comum é o Bucket Sort ser implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação. 
-A implementação pode ser feita em quatro passos:
-1. Criação dos n baldes (inicializados como listas vazias)
-2. Inserção dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`
-3. Ordenar cada balde separadamente
-4. Concatenar os conteúdos de todos os baldes em ordem crescente
+O mais comum é o Bucket Sort ser implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
 
-A simulação a seguir mostra o passo a passo de uma ordenação de um array de 7 elementos, com o uso de 10 baldes:
+A implementação pode ser feita em quatro passos:
+1. Criação dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
+2. Inserção dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
+3. Ordenar cada balde separadamente usando o mesmo ou outros algoritmos.
+4. Concatenar os conteúdos de todos os baldes em ordem crescente.
+
+E pronto, conseguimos organizar nossos elementos! [Fácil não?](https://www.youtube.com/watch?v=WWaLxFIVX1s)
+
+Vamos simular a seguir o passo a passo de uma ordenação de um array de 7 elementos, com o uso de 10 baldes.
+
+Teoricamente poderiamos ordenar qualquer coisa como estes 7 elementos aqui:
+::: 7 Elementos
+
+![](7cats.jpg)
+
+:::
+Mas por simplicidade preferimos ordenar números:
 
 ;bucket
 
@@ -71,26 +82,26 @@ Mas qual algoritmo seria o mais indicado? Vamos consultar as  [tabelas de ordena
 
 Qual das tabelas deveríamos escolher para analisar qual algoritmo é o melhor em conjunto com o bucket sort?
 
-Dica: pense na quantidade de elementos presente em cada balde. Idealmente, ela é grande ou pequena?
+**Dica**: pense na quantidade de elementos presente em cada balde. Idealmente, ela é grande ou pequena?
 
 ::: Gabarito
 Como queremos uma ordenação mais rápida possível dos elementos, vamos considerar a tabela da recomendação de tempo na prática. 
 
-A Tabela de de Tempo na Prática de um algoritmo com “n” pequeno!
+A Tabela de de Tempo na Prática de um algoritmo com “n” **pequeno**!
 
 ![](tabela.png)
 
-Por exemplo, um “n” enorme, como 5 bilhões de elementos em um array, logicamente não é recomendado usar o bucket sort, em razão da necessidade de intervalos que seriam necessários de criar, além de que até poderiam ultrapassar o espaço de memória disponível.
+Por exemplo, um “n” enorme, como 5 bilhões de elementos em um array, logicamente não é recomendado usar o bucket sort, em razão da quantidade de intervalos ("baldes") que seriam necessários criar, além de que até poderia ultrapassar o espaço de memória disponível.
 
 :::
 ???
 
-Agora que já sabemos aonde procurar, falta apenas escolher o algoritmo que será utilizado!
+Cero, agora que já sabemos onde procurar, falta apenas escolher o algoritmo que será utilizado!
 
 
 ??? Checkpoint
 
-Agora sim, qual algoritmo seria o mais indicado para ordenar os elementos dentro dos baldes? 
+Agora sim, qual algoritmo seria o mais indicado para ordenar os elementos **dentro** dos baldes? 
 
 
 ::: Gabarito
@@ -99,40 +110,58 @@ De acordo com a tabela, apesar de existirem poucas informações relacionadas a 
 :::
 ???
 
+O que vimos até aqui?
+---------
+
+::: Resumão
+1. O **Bucket Sort** "bota" os elementos da lista de entrada em baldes, e o número de baldes dependendo do tamanho dele.
+2. O ideal é que a distribuição dos elementos seja **uniforme** para não deixar alguns baldes sobrecarregados e outros vazios.
+3. **Dentro** de cada balde é usado outro algoritmo de ordenação, e pela tabela concluimos que o melhor para isso é o **Insertion Sort**.
+:::
+
 
 Complexidade
 ---------
 Com as informações anteriores, já é possível supor quais contextos representam o melhor e pior caso dele.
 
+Então não precisamos nem calcular a complexidade certo? Vou deixar a própria complexidade responder essa...
+
+::: Resposta
+
+![](no.png)
+
+:::
+
 
 ??? Checkpoint
 
-Tente pensar em um contexto que representa o pior caso de complexidade e um que represente o melhor caso de complexidade do bucket sort, ou seja, aquele que tornaria o algoritmo mais eficiente
+Tente pensar em um contexto que representa o **pior caso** de complexidade e um que represente o **melhor caso** de complexidade do bucket sort, ou seja, aquele que tornaria o algoritmo mais eficiente.
 
 
 ::: Gabarito
-**Melhor caso**: Os elementos estão distribuídos uniformemente em cada um dos baldes
+* **Melhor caso**: Os elementos estão distribuídos bem uniformemente em cada um dos baldes.
 
 
-**Pior caso**: Muitos elementos acumulados em um balde e presença de muitos baldes vazios.
+* **Pior caso**: Muitos elementos acumulados em um ou poucos baldes e presença de muitos baldes vazios.
 
 :::
 ???
 
 Vantagens e desvantagens
 ---------
-Uma das vantagens de usar o bucket sort é que uma vez que os elementos são distribuídos em buckets, cada um deles pode ser processado independentemente dos outros e de forma paralela. Como resultado, a classificação de intervalos funciona melhor e mais rápido quando os elementos do array dado são uniformemente distribuídos em todos os buckets com cada um deles contendo um número igual de elementos, representando assim o melhor caso.
+Até agora nós vimos o que é e como funciona o **Bucket Sort**, então com base nisso já poderiamos observar quais vantagens e desvantagens esse algoritmo tem, e não há melhor maneira que vendo seu melhor e seu pior caso.
 
 
-Entretanto, uma grande desvantagem de usar o bucket sort é que se há uma má distribuição dos buckets, o algoritmo poderá acabar realizando uma enorme quantidade de trabalho extra, sem benefício ou benefício mínimo, que é a situação que representa o pior caso.
-Posto isso, ainda está faltando um atributo bastante crucial na escolha de um algoritmo: a velocidade. Afinal, onde se encontra o Bucket Sort em relação à velocidade em comparação com outros algoritmos?
+* **Melhor caso:** Depois que os elementos são distribuídos em baldes, cada um deles pode ser processado independentemente dos outros e de forma paralela. Como resultado, a classificação de intervalos funciona melhor e mais rápido quando os elementos do array dado são bem distribuídos em todos os baldes com cada um deles contendo um número igual de elementos.
 
+
+* **Pior caso:** Se há uma má distribuição dos buckets, o algoritmo poderá acabar realizando uma enorme quantidade de trabalho extra, sem benefício ou benefício mínimo.
+
+Posto isso, ainda está faltando um atributo bastante crucial na escolha de um algoritmo: a **velocidade**. Afinal, onde se encontra o Bucket Sort em relação à velocidade em comparação com outros algoritmos?
 
 Esta é uma das características mais interessantes do Bucket Sort, pois ele é um algoritmo que não funciona totalmente sozinho!! Ele é responsável pela organização dos buckets, mas quem faz realmente a ordenação do array dentro de cada bucket é o **Insertion Sort**, como já vimos.
 
-
-Além disso, o bucket sort tem outra vantagem de que a complexidade do intervalo pode ainda ser estável dependendo do algoritmo usado para classificar os elementos do intervalo. No caso, o Insertion Sort é estável, logo, o Bucket Sort também é estável.
-
+Além disso, o bucket sort tem outra vantagem de que a complexidade do intervalo pode ainda ser estável dependendo do algoritmo usado para classificar os elementos do intervalo. No caso, **como o Insertion Sort é estável, logo, o Bucket Sort também é estável**.
 
 ??? Checkpoint
 
@@ -147,7 +176,9 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste 3 
 Uso prático
 ---------
 
-Uma outra vantagem do Bucket Sort é a possibilidade de usá-lo como um algoritmo de classificação externo. Então, como exemplo de aplicação, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, distribuir os itens em baldes armazenados em arquivos externos e em seguida classificar cada arquivo na memória RAM independentemente 
+Uma outra vantagem do **Bucket Sort** é a possibilidade de usá-lo como um algoritmo de classificação externo. 
+
+Então, como exemplo de aplicação, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, distribuir os itens em baldes armazenados em arquivos externos e em seguida classificar cada arquivo na memória RAM independentemente.
 
 ![](ram.png)
 
@@ -176,10 +207,6 @@ void bucketSort(int A[], int n)
 ???
 
 ------------------------------------------------
-1. funcionamento em detalhes e exemplo
-2. suposicoes de entrada
-3. complexidade
-4. Vantagens e desvantagens
-5. Uso
+
 
 
