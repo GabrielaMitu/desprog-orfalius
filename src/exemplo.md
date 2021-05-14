@@ -175,11 +175,6 @@ void bucketSort(int A[], int n)
 :::
 ???
 
-------------------------------------------------
-1. funcionamento em detalhes e exemplo
-2. suposicoes de entrada
-3. complexidade
-4. Vantagens e desvantagens
-5. Uso
+
 
 
