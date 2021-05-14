@@ -1,10 +1,29 @@
-Título
+Bucket Sort
 ======
 
-Subtítulo
+Introdução
 ---------
 
-Para criar um parágrafo, basta escrever um texto contínuo, sem pular linhas.
+Antes de pensar em como o algoritmo funciona, vamos começar com algo mais simples: 
+porque será que o algoritmo se chama Bucket Sort? O que ele tem a ver com baldes?
+
+![](bucket.png)
+
+Baldes são recipientes, em que se pode botar tanto liquidos como sólidos então no 
+caso do algoritmo vamos usar diversos baldes para botar o que formos organizar.
+
+Podemos ordenar tanto números como palavras letras e etc. 
+
+A nossa lista de entrada precisa obrigatoriamente ter:
+
+* Intervalo conhecido;
+
+* ter sido feita com distribuição uniforme
+
+Ou seja se a entrada for bastante crescente ou descrescente o algoritmo não vai 
+funcionar tão bem.
+
+
 
 Você também pode criar
 
@@ -12,11 +31,7 @@ Você também pode criar
 
 2. ordenadas,
 
-assim como
 
-* listas;
-
-* não-ordenadas
 
 e imagens. Lembre que todas as imagens devem estar em uma subpasta *img*.
 
