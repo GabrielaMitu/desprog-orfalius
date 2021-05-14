@@ -56,10 +56,10 @@ Funcionamento em detalhes
 O mais comum é o Bucket Sort ser implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
 
 A implementação pode ser feita em quatro passos:
-1. Criação dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
-2. Inserção dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
-3. Ordenar cada balde separadamente usando o mesmo ou outros algoritmos.
-4. Concatenar os conteúdos de todos os baldes em ordem crescente.
+1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
+2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
+3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos.
+4. **Concatenar** os conteúdos de todos os baldes em ordem crescente.
 
 E pronto, conseguimos organizar nossos elementos! [Fácil não?](https://www.youtube.com/watch?v=WWaLxFIVX1s)
 
@@ -127,7 +127,7 @@ Complexidade
 ---------
 Com as informações anteriores, já é possível supor quais contextos representam o melhor e o pior caso do Bucket Sort.
 
-Então para fazer essas suposições não precisamos nem calcular a complexidade certo? Vou deixar a própria complexidade responder essa...
+Então para fazer essas suposições não precisamos nem calcular a complexidade, certo? Vou deixar a própria complexidade responder essa...
 
 ::: Resposta
 
@@ -159,12 +159,11 @@ Desta maneira, os casos de complexidade podem ser resumidos de acordo com a segu
 | Médio        | O(n+k)   |
 | Pior         | O(n^2)   |
  
-No pior caso, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algorítimo usado para a ordenação dentro dos baldes: o Insertion Sort.
- 
-Quando os elementos são uniformemente distribuídos entre os baldes, a complexidade geral será linear. Isso ocorre no melhor caso. Nesta situação, a complexidade para fazer os baldes é O(n) e aquela para classificar os elementos de cada balde é O(k).
- 
-Já a complexidade de caso médio ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo linear.
+No **melhor caso**, quando os elementos são uniformemente distribuídos entre os baldes, a complexidade geral será **linear**. Nesta situação, a complexidade para fazer os baldes é **O(n)** e aquela para classificar os elementos de cada balde é **O(k)**.
 
+Já a complexidade de **caso médio** ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo **linear**.
+
+E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algorítimo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
 
 
 Vantagens e desvantagens
@@ -185,7 +184,7 @@ Além disso, o bucket sort tem outra vantagem de que a complexidade do intervalo
 
 ??? Checkpoint
 
-Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste 3 vantagens e 2 desvantagens do Bucket Sort
+Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **3 vantagens** e **2 desvantagens** do Bucket Sort
 
 ::: Gabarito
 ![](comparacao.png)
@@ -202,15 +201,10 @@ Então, como exemplo de aplicação, se for necessário classificar um array mui
 
 ![](ram.png)
 
-
-
-
 ??? Desafio
 Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
 
 Escreva um pseudocódigo da implementação do Bucket Sort.
-
-
 
 ::: Gabarito
 ``` c
