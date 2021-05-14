@@ -193,7 +193,7 @@ Escreva um pseudocódigo da implementação do Bucket Sort.
 
 ::: Gabarito
 ``` c
-void bucketSort(int A[], int n)
+void bucketSort (int A[], int n) {
     Para i entre 0 e n-1:
         faça B[i] uma lista vazia
     Para i entre 0 e n-1:
