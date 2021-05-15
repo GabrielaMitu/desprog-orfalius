@@ -163,7 +163,7 @@ No **melhor caso**, quando os elementos são uniformemente distribuídos entre o
 
 Já a complexidade de **caso médio** ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo **linear**.
 
-E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algorítimo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
+E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
 
 
 Vantagens e desvantagens
