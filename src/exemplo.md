@@ -1,11 +1,12 @@
 Bucket Sort
 ======
 
-Ideia Geral do Algoritmo
+Ideia Geral do Algoritmo 
 ---------
 
 Um algoritmo de classificação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
 Existem muitos algoritmos de classificação diferentes, com vários prós e contras. Nesse Handout iremos focar no algoritmo **Bucket Sort**.
+
 
 Antes de pensar em como o algoritmo funciona, vamos começar com algo mais simples: 
 porque será que o algoritmo se chama Bucket Sort? O que ele tem a ver com baldes?
@@ -15,41 +16,28 @@ porque será que o algoritmo se chama Bucket Sort? O que ele tem a ver com balde
 Baldes são recipientes, em que se pode botar tanto liquidos como sólidos então no 
 caso do algoritmo vamos usar diversos baldes para botar o que formos organizar.
 
-Vamos começar imaginando uma situação hipotética:
 
-Um belo dia, você encontrou um jogo de Bingo e resolveu ordenar as bolas em ordem crescente para armazená-las de forma organizada. No jogo existem 75 bolas. Ordená-las diretamente levaria muito tempo, mas você percebeu que tinha 5 pequenos baldes à disposição.
+Uso prático
+---------
+
+Uma vantagem do **Bucket Sort** é a possibilidade de usá-lo como um algoritmo de classificação externo. 
+
+Então, como exemplo de aplicação, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, distribuir os itens em baldes armazenados em arquivos externos e em seguida classificar cada arquivo na memória RAM independentemente.
+
+![](ram.png)
+
+
+Agora, vamos começar imaginando uma situação hipotética:
+
+Um belo dia, você e seus amigos encontraram um jogo de BINGO e resolveu ordenar as bolas em ordem crescente para armazená-las de forma organizada. No jogo existem 75 bolas. Ordená-las diretamente levaria muito tempo, mas você percebeu que tinha 5 pequenos baldes à disposição.
 
 
 ![](bingo.png)
 
 
+Uma maneira que poderíamos utilizar esses baldes para tornar a ordenação mais rápida  seria estabelecer cada balde como um intervalo numérico. Como existem 75 bolas e 5 baldes, cada balde teria ao final da ordenação 15 bolas. No primeiro, colocaríamos as bolas de 1 a 15, no segundo, as bolas de 16 a 30 e assim por diante. Desse modo, ao final teríamos apenas que organizar os baldes individualmente, ou seja, cada um organizaria um balde. Concatenando as bolas dos baldes em ordem crescente teríamos então o resultado ordenado desejado.
+E essa é a ideia fundamental do Bucket Sort. A entrada a ser ordenada, um array, é dividida em intervalos (os chamados “baldes” ou “buckets”). Em seguida, esses buckets são ordenados separadamente e, após concatenados, resultam na saída, correspondente ao array de entrada agora ordenado.
 
-??? Checkpoint
-
-De que maneira poderíamos utilizar esses baldes para tornar a ordenação mais rápida?
-
-::: Gabarito
-Poderíamos estabelecer cada balde como um intervalo numérico. Como existem 75 bolas e 5 baldes, cada balde teria ao final da ordenação 15 bolas se organizadas de forma equilibrada. No primeiro, colocaríamos as bolas de 1 a 15, no segundo, as bolas de 16 a 30 e assim por diante.
-
-Desse modo, ao final teríamos apenas que organizar os baldes individualmente (cada balde sendo organizado por uma pessoa ao mesmo tempo). Concatenando as bolas dos baldes em ordem crescente teríamos então o resultado ordenado desejado.
-:::
-
-???
-
-
-E essa é a ideia fundamental do Bucket Sort. 
-A entrada a ser ordenada, um array, é dividida em intervalos (os chamados “baldes” ou "buckets"). Em seguida, esses buckets são ordenados separadamente e, após concatenados, resultam na saída, correspondente ao array de entrada agora ordenado.
-
-
-Então ideal pra nossa entrada é que ela tenha:
-
-* Intervalo conhecido;
-
-* Distribuição uniforme;
-
-O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
-
-Essa distribuição uniforme é interessante porque ela ajuda com que os elementos estejam bem distribuídos entre os baldes, evitando que a organização de um balde seja muito mais trabalhosa que outro balde.
 
 Funcionamento em detalhes
 ---------
@@ -85,7 +73,7 @@ Mas qual algoritmo seria o mais indicado se o objetivo fosse a máxima eficiênc
 
 Qual das tabelas deveríamos escolher para analisar qual algoritmo é o melhor em conjunto com o bucket sort em eficiência?
 
-**Dica**: Pense na quantidade de elementos presentes em cada balde. Idealmente, ela é grande ou pequena?
+**Dica**: Pense na quantidade de elementos presentes em cada balde. É recomendado que essa quantidade de elementos seja grande ou pequena?
 
 ::: Gabarito
 Como queremos uma ordenação mais rápida possível dos elementos, vamos considerar a tabela da recomendação de tempo na prática. 
@@ -165,6 +153,15 @@ Já a complexidade de **caso médio** ocorre quando os elementos são distribuí
 
 E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
 
+Então é recomendado que nossa entrada tenha:
+
+* Intervalo conhecido;
+
+* Distribuição uniforme;
+
+O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
+
+Essa distribuição uniforme é interessante porque ela ajuda com que os elementos estejam bem distribuídos entre os baldes, evitando que a organização de um balde seja muito mais trabalhosa que outro balde.
 
 Vantagens e desvantagens
 ---------
@@ -192,14 +189,6 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 :::
 ???
 
-Uso prático
----------
-
-Uma outra vantagem do **Bucket Sort** é a possibilidade de usá-lo como um algoritmo de classificação externo. 
-
-Então, como exemplo de aplicação, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, distribuir os itens em baldes armazenados em arquivos externos e em seguida classificar cada arquivo na memória RAM independentemente.
-
-![](ram.png)
 
 ??? Desafio
 Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
@@ -224,4 +213,9 @@ void bucketSort (int A[], int n) {
 ------------------------------------------------
 
 
+<!-- 
+
+
+
+ -->
 
