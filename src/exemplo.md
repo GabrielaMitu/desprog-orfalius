@@ -153,15 +153,6 @@ Já a complexidade de **caso médio** ocorre quando os elementos são distribuí
 
 E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
 
-Então é recomendado que nossa entrada tenha:
-
-* Intervalo conhecido;
-
-* Distribuição uniforme;
-
-O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
-
-Essa distribuição uniforme é interessante porque ela ajuda com que os elementos estejam bem distribuídos entre os baldes, evitando que a organização de um balde seja muito mais trabalhosa que outro balde.
 
 Vantagens e desvantagens
 ---------
@@ -217,5 +208,13 @@ void bucketSort (int A[], int n) {
 
 
 
- -->
+Então é recomendado que nossa entrada tenha:
+
+* Intervalo conhecido;
+
+* Distribuição uniforme;
+
+O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
+
+Essa distribuição uniforme é interessante porque ela ajuda com que os elementos estejam bem distribuídos entre os baldes, evitando que a organização de um balde seja muito mais trabalhosa que outro balde. -->
 
