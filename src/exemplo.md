@@ -151,6 +151,99 @@ Tente pensar em um contexto que representa o **pior caso** de complexidade e um 
 :::
 ???
 
+Na situação do **melhor caso**, quando os elementos são uniformemente distribuídos entre os baldes, consideraremos duas complexidades: a complexidade para fazer os baldes, sendo $n$ a quantidade de elementos do array e $k$ o número de baldes.
+
+
+??? Checkpoint
+Para facilitar o processo de aquisição da complexidade vamos tentar criar um pseudocódigo do passo 4 sobre o funcionamento do bucket sort, ou seja, aquela que pega os elementos de cada balde e coloca em um array.
+
+::: Gabarito
+``` c
+For each bucket b:
+    For each element x in b:
+        Append x to the array.
+```
+:::
+???
+
+Qual é a complexidade afinal? Bom, agora que temos o pseudocódigo, podemos quebrar um pouco mais a cabeça para pensar qual seria então a complexidade.
+
+??? Checkpoint
+A partir dessa análise, qual é o tempo de execução total?
+
+::: Gabarito
+Bem, existem $k$ intervalos diferentes, então o loop mais externo deve levar pelo menos $O(k)$ tempo, porque temos que olhar em cada intervalo. Já o loop interno será executado um total de $O(n)$ vezes, porque há um total de $n$ elementos distribuídos pelos baldes. Logo a complexidade do melhor caso é $O(n + k)$.
+:::
+???
+
+E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
+Então, dado que o código em C de Insertion Sort é:
+
+``` c
+void insertion_sort(int v[], int n) {
+    for (int i = 1; i < n; i++) {
+        int temp = v[i];
+
+        int j;
+        for (j = i; j > 0; j--) {
+            if (v[j - 1] <= temp) {
+                break;
+            }
+            v[j] = v[j - 1];
+        }
+
+        v[j] = temp;
+    }
+}
+```
+
+??? Checkpoint
+Como é possível estimar a complexidade do **Insertion Sort** a partir da receita da [Aula 6](https://ensino.hashi.pro.br/desprog/aula6/index.html)
+
+::: Gabarito
+Vamos chamar de $x$ a quantidade de iterações do loop externo e vamos chamar de $y$ a quantidade de iterações de uma execução do loop interno em função de $i$.
+
+Como $i = 1 + 1*k$ e sabemos que  $i < n$ depois de $ x - 1 $ iterações, temos: 
+$$ x < n $$
+
+Como $j = i - 1*k$ e sabemos que $j > 0$ depois de $y - 1$ iterações, temos:
+$$y < i+1$$
+
+Os valores de $i$ ao longo do loop externo são:
+$$i = 1,2,3,....,x$$
+
+ou seja, o total de iterações de todas as execuções do loop interno é menor que 
+$$(1+1)+(2+1)+(3+1)+...+(x+1)$$
+$$= 2+3+4+...+(x+1)$$
+
+Isso é uma soma de PA com
+
+* primeiro elemento $2$;
+* último elemento $x+1$;
+* quantidade de elementos $x$,
+
+ou seja, 
+
+$$(2+x+1)*\frac{x}{2}$$
+$$(x+3)*\frac{x}{2}$$
+$$<(n+3)*\frac{n}{2}$$
+$$=\frac{n^2 + 3n}{2}$$
+
+Portanto, pelas regras de simplificação, a complexidade do código é $O(n^2)$ e, consequentemente, a complexidade do pior caso do **Bucket Sort** é $O(n^2)$ também.
+
+**Obs.:** Esse cálculo foi retirado da [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html), mas para reforçar o aprendizado colocamos ele aqui novamente.
+
+:::
+???
+
+Temos ainda o caso de complexidade de **caso médio**, o qual ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada em tempo **linear** assim como no **melhor caso**.
+
+<!-- No **melhor caso**, quando os elementos são uniformemente distribuídos entre os baldes, a complexidade geral será **linear**. Nesta situação, a complexidade para fazer os baldes é **O(n)** e aquela para classificar os elementos de cada balde é **O(k)**.
+
+Já a complexidade de **caso médio** ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo **linear**.
+
+E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**. -->
+
 
 Desta maneira, os casos de complexidade podem ser resumidos de acordo com a seguinte tabela:
  
@@ -160,12 +253,6 @@ Desta maneira, os casos de complexidade podem ser resumidos de acordo com a segu
 | Médio        | O(n+k)   |
 | Pior         | O(n^2)   |
  
-No **melhor caso**, quando os elementos são uniformemente distribuídos entre os baldes, a complexidade geral será **linear**. Nesta situação, a complexidade para fazer os baldes é **O(n)** e aquela para classificar os elementos de cada balde é **O(k)**.
-
-Já a complexidade de **caso médio** ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo **linear**.
-
-E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
-
 
 Vantagens e desvantagens
 ---------
