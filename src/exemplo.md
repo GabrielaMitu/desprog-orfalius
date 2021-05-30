@@ -1,7 +1,7 @@
 Bucket Sort
 ======
 
-Ideia Geral do Algoritmo 
+Ideia Geral do Algoritmo  
 ---------
 
 Um algoritmo de classificação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
@@ -20,14 +20,14 @@ caso do algoritmo vamos usar diversos baldes para botar o que formos organizar.
 Uso prático
 ---------
 
-Uma vantagem do **Bucket Sort** é a possibilidade de usá-lo como um algoritmo de classificação externo. 
+Uma vantagem do **Bucket Sort** é a possibilidade de usá-lo como um algoritmo de **classificação externo**. 
 
 Então, como exemplo de aplicação, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, distribuir os itens em baldes armazenados em arquivos externos e em seguida classificar cada arquivo na memória RAM independentemente.
 
 ![](ram.png)
 
 
-Agora, vamos começar imaginando uma situação hipotética:
+Agora, vamos imaginar uma situação hipotética:
 
 Um belo dia, você e seus amigos encontraram um jogo de BINGO e resolveu ordenar as bolas em ordem crescente para armazená-las de forma organizada. No jogo existem 75 bolas. Ordená-las diretamente levaria muito tempo, mas você percebeu que tinha 5 pequenos baldes à disposição.
 
@@ -35,13 +35,24 @@ Um belo dia, você e seus amigos encontraram um jogo de BINGO e resolveu ordenar
 ![](bingo.png)
 
 
-Uma maneira que poderíamos utilizar esses baldes para tornar a ordenação mais rápida  seria estabelecer cada balde como um intervalo numérico. Como existem 75 bolas e 5 baldes, cada balde teria ao final da ordenação 15 bolas. No primeiro, colocaríamos as bolas de 1 a 15, no segundo, as bolas de 16 a 30 e assim por diante. Desse modo, ao final teríamos apenas que organizar os baldes individualmente, ou seja, cada um organizaria um balde. Concatenando as bolas dos baldes em ordem crescente teríamos então o resultado ordenado desejado.
-E essa é a ideia fundamental do Bucket Sort. A entrada a ser ordenada, um array, é dividida em intervalos (os chamados “baldes” ou “buckets”). Em seguida, esses buckets são ordenados separadamente e, após concatenados, resultam na saída, correspondente ao array de entrada agora ordenado.
+Uma maneira que poderíamos utilizar esses baldes para tornar a ordenação mais rápida seria estabelecer cada balde como um intervalo numérico. Como existem 75 bolas e 5 baldes, cada balde teria ao final da ordenação 15 bolas. Desta forma, seguiríamos os seguintes passos: 
+
+
+1. No primeiro, colocaríamos as bolas de 1 a 15, no segundo, as bolas de 16 a 30 e assim por diante.
+
+
+2. Ao final teríamos apenas que organizar os baldes individualmente, ou seja, cada um organizaria um balde. 
+
+
+3. Concatenando as bolas dos baldes em ordem crescente teríamos então o resultado ordenado desejado.
+
+
+Essa é a ideia fundamental do Bucket Sort. A entrada a ser ordenada, um array, é dividida em intervalos (os chamados “baldes” ou “buckets”). Em seguida, esses buckets são ordenados separadamente e, após concatenados, resultam na saída, correspondente ao array de entrada agora ordenado.
 
 
 Funcionamento em detalhes
 ---------
-O mais comum é o Bucket Sort ser implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
+O mais comum é o Bucket Sort implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
 
 A implementação pode ser feita em quatro passos:
 1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
@@ -92,7 +103,7 @@ Certo, agora que já sabemos onde procurar, falta apenas escolher o algoritmo qu
 
 ??? Checkpoint
 
-Agora sim, qual algoritmo seria o mais indicado para ordenar os elementos **dentro** dos baldes? 
+Agora sim, qual algoritmo seria o mais indicado para ordenar os elementos **dentro** dos baldes dado que há uma quantidade de elementos n pequena em cada balde? 
 
 
 ::: Gabarito
@@ -105,9 +116,11 @@ O que vimos até aqui?
 ---------
 
 ::: Resumão
-1. O **Bucket Sort** coloca os elementos da lista de entrada em baldes e define o número de baldes depende do tamanho passado como argumento.
-2. O ideal é que a distribuição dos elementos seja **uniforme** para não deixar alguns baldes sobrecarregados e outros vazios.
-3. **Dentro** de cada balde é usado outro algoritmo de ordenação. Pela tabela concluimos que o melhor para isso é o **Insertion Sort**.
+1. O **Bucket Sort** coloca os elementos da lista de entrada divididos em baldes, cada um representando um intervalo diferente.
+
+2. A fim de uma maior eficiência, é recomendado uma quantidade pequena de elementos em cada balde 
+
+3. **Dentro** de cada balde é usado outro algoritmo de ordenação. Pela tabela concluimos que o melhor para isso é o **Insertion Sort** quando a quantidade de elementos n é pequeno em cada balde
 :::
 
 
