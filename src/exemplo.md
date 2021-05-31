@@ -20,25 +20,27 @@ caso do algoritmo vamos usar diversos baldes para botar o que formos organizar.
 Uso prático
 ---------
 
-Uma vantagem do **Bucket Sort** é a possibilidade de usá-lo como um algoritmo de **classificação externo**. 
+Uma aplicação muito comum do **Bucket Sort** é sua utilização como algoritmo de **classificação externo**.  
 
-Então, como exemplo de aplicação, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, distribuir os itens em baldes armazenados em arquivos externos e em seguida classificar cada arquivo na memória RAM independentemente.
+
+Assim, se for necessário classificar um array muito grande que não cabe na memória, será possível transmitir a lista pela memória RAM, para ser ordenada.
 
 ![](ram.png)
 
+**Mas como exatamente isso funciona?**
 
-Agora, vamos imaginar uma situação hipotética:
+Para descobrir, vamos primeiramente imaginar uma situação hipotética:
 
-Um belo dia, você e seus amigos encontraram um jogo de BINGO e resolveu ordenar as bolas em ordem crescente para armazená-las de forma organizada. No jogo existem 75 bolas. Ordená-las diretamente levaria muito tempo, mas você percebeu que tinha 5 pequenos baldes à disposição.
+Um belo dia, você e seus amigos encontraram um jogo de BINGO e resolveram ordenar as bolas em ordem crescente para armazená-las de forma organizada. No jogo existem 75 bolas. Ordená-las diretamente levaria muito tempo, mas você percebeu que tinha 5 pequenos baldes à disposição.
 
 
 ![](bingo.png)
 
 
-Uma maneira que poderíamos utilizar esses baldes para tornar a ordenação mais rápida seria estabelecer cada balde como um intervalo numérico. Como existem 75 bolas e 5 baldes, cada balde teria ao final da ordenação 15 bolas. Desta forma, seguiríamos os seguintes passos: 
+Uma maneira que vocês poderiam utilizar esses baldes para tornar a ordenação mais rápida seria estabelecer cada balde como um intervalo numérico. Como existem 75 bolas e 5 baldes, cada balde teria ao final da ordenação 15 bolas. Desta forma, poderíamos seguir os seguintes passos: 
 
 
-1. No primeiro, colocaríamos as bolas de 1 a 15, no segundo, as bolas de 16 a 30 e assim por diante.
+1. No primeiro balde, colocaríamos as bolas de 1 a 15, no segundo, as bolas de 16 a 30 e assim por diante.
 
 
 2. Ao final teríamos apenas que organizar os baldes individualmente, ou seja, cada um organizaria um balde. 
@@ -280,25 +282,19 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 :::
 ???
 
-
+Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para entender o funcionamento de sua aplicação principal!
 ??? Desafio
-Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
 
-Escreva um pseudocódigo da implementação do Bucket Sort.
+Você consegue imaginar o que acontece utilizado como algoritmo de classificação externa? (como no primeiro caso apresentado neste handout)
+
+Dica: pense nos **4** passos fundamentais para o funcionamento do algoritmo.
 
 ::: Gabarito
-``` c
-void bucketSort (int A[], int n) {
-    Para i entre 0 e n-1:
-        faça B[i] uma lista vazia
-    Para i entre 0 e n-1:
-        insira o elemento A[i] em B[n*A[i]]
-    Para i entre 0 e n-1:
-        ordene a lista B[i] com o INSERTION SORT
-    Concatene todas as listas B em ordem crescente
-}
-```
-:::
+A ordenação ocorreria por meio dos seguintes passos:
+1. Criar baldes armazenados em arquivos externos.
+2. Distribuir os itens pelos seus respectivos baldes.
+3. Classificar cada arquivo na memória RAM independentemente.
+4. Concatenar os conteúdos de cada balde. Assim, ao pegar os dados da memória RAM, teremos um array ordenado.
 ???
 
 ------------------------------------------------
