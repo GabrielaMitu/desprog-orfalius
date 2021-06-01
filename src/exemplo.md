@@ -203,7 +203,7 @@ Como é possível estimar a complexidade do **Insertion Sort** a partir da recei
 ::: Gabarito
 Vamos chamar de $x$ a quantidade de iterações do loop externo e vamos chamar de $y$ a quantidade de iterações de uma execução do loop interno em função de $i$.
 
-Como $i = 1 + 1*k$ e sabemos que  $i < n$ depois de $ x - 1 $ iterações, temos: 
+Como $i = 1 + 1*k$ e sabemos que  $i < n$ depois de $x - 1$ iterações, temos: 
 $$ x < n $$
 
 Como $j = i - 1*k$ e sabemos que $j > 0$ depois de $y - 1$ iterações, temos:
@@ -266,7 +266,7 @@ Até agora nós vimos o que é e como funciona o **Bucket Sort**, então com bas
 
 Posto isso, ainda está faltando um atributo bastante crucial na escolha de um algoritmo: a **velocidade**. Afinal, onde se encontra o Bucket Sort em relação à velocidade em comparação com outros algoritmos?
 
-Esta é uma das características mais interessantes do Bucket Sort, pois ele é um algoritmo que não funciona totalmente sozinho!! Ele é responsável pela organização dos buckets, mas quem faz realmente a ordenação do array dentro de cada bucket é o **Insertion Sort**, como já vimos.
+Esta é uma das características mais interessantes do Bucket Sort, pois ele é um algoritmo que não funciona totalmente sozinho como já mencionamos. Ele é responsável pela organização dos buckets, mas quem faz realmente a ordenação do array dentro de cada bucket é o **Insertion Sort**.
 
 Além disso, o bucket sort tem outra vantagem de que a complexidade do intervalo pode ainda ser estável dependendo do algoritmo usado para classificar os elementos do intervalo. No caso, **como o Insertion Sort é estável, logo, o Bucket Sort também é estável**.
 
@@ -284,22 +284,109 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 ??? Desafio
 Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
 
-Escreva um pseudocódigo da implementação do Bucket Sort.
+Escreva um código em Java sobre a implementação do Bucket Sort.
+
+**Obs.:** Tudo bem se não conseguir ou não souber muito bem a linguagem Java, o importante é entender o passo a passo em um código de verdade!!
 
 ::: Gabarito
-``` c
-void bucketSort (int A[], int n) {
-    Para i entre 0 e n-1:
-        faça B[i] uma lista vazia
-    Para i entre 0 e n-1:
-        insira o elemento A[i] em B[n*A[i]]
-    Para i entre 0 e n-1:
-        ordene a lista B[i] com o INSERTION SORT
-    Concatene todas as listas B em ordem crescente
+
+Vamos começar com o código do Insertion Sort:
+``` java
+
+/**
+ * Classic insertion sort in place. 
+ * @returns null, modifies argument array.
+ */
+export const insertionSort = (array) => {
+    let n = array.length;
+    for(let i = 0; i < n ; i++){
+        let key = array[i];
+        let j = i - 1;
+        
+        while (j >= 0 && array[j] < key){
+                array[j+1] = array[j];
+                j = j-1;
+        }
+
+        array[j+1] = key; 
+    }
+}
+```
+E agora faremos o Bucket Sort:
+
+``` java
+
+// Começaremos recebendo um array de números desordenados assim como foi feito na simulação:
+let unsorted = [77, 73, 64, 98, 94, 81, 72, 81, 83, 75];
+console.log("Unsorted array: ",unsorted);
+
+//Aqui o array dos números já ordenados:
+let sorted = bucketSort(unsorted, true);
+console.log("Sorted array: ", sorted);
+
+/**
+ * Devido à natureza da classificação de balde, é mais difícil fazer uma
+ * função de tamanho único para a classificação de balde.
+ * Assim, esta função serve apenas para classificar o nosso conjunto especificado
+ * 
+ * @param {Array of grades} array 
+ * @param {Boolean true if ascending false if descending} ascending 
+ */
+export const bucketSortGrades = (array) => {
+    //bucket array
+    let buckets = [
+        //Index 0 : <=70
+        [],
+        //Index 1 : 71-75
+        [],
+        //Index 2 : 76-80
+        [],
+        //Index 3 : 81-85
+        [],
+        //Index 4 : >=86
+        []
+    ];
+    
+    //Colocando dentro dos buckets
+    array.forEach(grade=> {
+        if (grade <= 70) {
+            buckets[0].push(grade);
+        }
+        else if (grade <= 75 && grade > 70){
+            buckets[1].push(grade);
+        }
+        else if (grade <= 80 && grade > 75){
+            buckets[2].push(grade);
+        }
+        else if (grade <= 85 && grade > 80){
+            buckets[3].push(grade);
+        }
+        else{
+            buckets[4].push(grade);
+        }
+    });
+    
+    /**
+     * Obs.: Uma otimização comum é nivelar a matriz de balde primeiro, em seguida,
+     * classificar toda a matriz
+     * Deixaremos essa opção como comentários dado que é uma otimização
+     */
+    //let flatBucket = buckets.flat();
+    //insertionSort(flatBucket, ascending);
+    //return flatBucket;
+
+    //Agora usaremos o Insertion Sort para organizar cada balde
+    for (let i = 0 ; i < buckets.length ; i++){
+        insertionSort(buckets[i]);
+    };
+    
+    //Achatando matriz de buckets e retornando:
+    return buckets.flat();    
 }
 ```
 :::
 ???
+
 
 ------------------------------------------------
 
