@@ -72,7 +72,18 @@ Teoricamente poderiamos ordenar qualquer coisa como estes 7 elementos aqui:
 :::
 Mas por simplicidade preferimos ordenar números:
 
+??? Checkpoint
+Vamos ver se você entendeu mesmo o passo a passo do funcionamento!
+Tente simular a ordenação do array com os números abaixo com um intervalo de dez baldes.
+
+array = {13, 68, 35, 17, 92, 94}
+
+::: Gabarito
 ;bucket
+
+:::
+???
+
 
 
 Como exatamente ocorre essa ordenação dentro de cada balde do passo 3? 
@@ -288,9 +299,9 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 ??? Desafio
 Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
 
-Escreva um código em Java sobre a implementação do Bucket Sort.
+Escreva um código em JavaScript sobre a implementação do Bucket Sort.
 
-**Obs.:** Tudo bem se não conseguir ou não souber muito bem a linguagem Java, o importante é entender o passo a passo em um código de verdade!!
+**Obs.:** Tudo bem se não conseguir ou não souber muito bem a linguagem JavaScript, o importante é entender o passo a passo em um código de verdade!!
 
 ::: Gabarito
 
