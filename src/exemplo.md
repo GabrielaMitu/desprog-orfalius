@@ -181,10 +181,14 @@ Então, dado que o código em C de Insertion Sort é:
 
 ``` c
 void insertion_sort(int v[], int n) {
-    for (int i = 1; i < n; i++) {
-        int temp = v[i];
-
+    for (int i = 1; i < n; i++) {   // n é o tamanho da array
+        int temp = v[i];            // para todo i de 1 a n-1
+        
         int j;
+
+        /* Desloca todos os elementos entre j e i-1
+        para a direita, sobrescrevendo v[j] */
+
         for (j = i; j > 0; j--) {
             if (v[j - 1] <= temp) {
                 break;
@@ -292,19 +296,22 @@ Escreva um código em Java sobre a implementação do Bucket Sort.
 
 Vamos começar com o código do Insertion Sort:
 ``` java
-
 /**
- * Classic insertion sort in place. 
- * @returns null, modifies argument array.
+ * Insertion Sort classica, retorna 
+ * null e modifica a array dada.
  */
+
 export const insertionSort = (array) => {
-    let n = array.length;
-    for(let i = 0; i < n ; i++){
+    let n = array.length;                   // n é o tamanho da array
+    for(let i = 0; i < n ; i++){            // para todo i de 1 a n-1
         let key = array[i];
         let j = i - 1;
+
+        /* Desloca todos os elementos entre j e i-1
+        para a direita, sobrescrevendo array[j] */
         
-        while (j >= 0 && array[j] < key){
-                array[j+1] = array[j];
+        while (j >= 0 && array[j] < key){   
+                array[j+1] = array[j];      
                 j = j-1;
         }
 
@@ -316,11 +323,16 @@ E agora faremos o Bucket Sort:
 
 ``` java
 
-// Começaremos recebendo um array de números desordenados assim como foi feito na simulação:
+/**
+ * Começaremos recebendo um array de números 
+ * desordenados assim como foi feito na simulação: 
+ */
+
 let unsorted = [77, 73, 64, 98, 94, 81, 72, 81, 83, 75];
 console.log("Unsorted array: ",unsorted);
 
-//Aqui o array dos números já ordenados:
+// E aqui ordenamos essa array de números:
+
 let sorted = bucketSort(unsorted, true);
 console.log("Sorted array: ", sorted);
 
@@ -332,8 +344,9 @@ console.log("Sorted array: ", sorted);
  * @param {Array of grades} array 
  * @param {Boolean true if ascending false if descending} ascending 
  */
+
 export const bucketSortGrades = (array) => {
-    //bucket array
+    // Bucket array
     let buckets = [
         //Index 0 : <=70
         [],
@@ -347,7 +360,7 @@ export const bucketSortGrades = (array) => {
         []
     ];
     
-    //Colocando dentro dos buckets
+    // Colocando dentro dos buckets
     array.forEach(grade=> {
         if (grade <= 70) {
             buckets[0].push(grade);
@@ -369,18 +382,18 @@ export const bucketSortGrades = (array) => {
     /**
      * Obs.: Uma otimização comum é nivelar a matriz de balde primeiro, em seguida,
      * classificar toda a matriz
-     * Deixaremos essa opção como comentários dado que é uma otimização
+     * Deixaremos essa opção comentada dado que é uma otimização
      */
     //let flatBucket = buckets.flat();
     //insertionSort(flatBucket, ascending);
     //return flatBucket;
 
-    //Agora usaremos o Insertion Sort para organizar cada balde
+    // Agora usaremos o Insertion Sort para organizar cada balde
     for (let i = 0 ; i < buckets.length ; i++){
         insertionSort(buckets[i]);
     };
     
-    //Achatando matriz de buckets e retornando:
+    // Achatando matriz de buckets e retornando:
     return buckets.flat();    
 }
 ```
