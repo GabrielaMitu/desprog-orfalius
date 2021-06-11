@@ -4,7 +4,7 @@ Bucket Sort
 Ideia Geral do Algoritmo  
 ---------
 
-Um algoritmo de classificação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
+Um algoritmo de ordenação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
 Existem muitos algoritmos de classificação diferentes, com vários prós e contras. Nesse Handout iremos focar no algoritmo **Bucket Sort**.
 
 
@@ -188,76 +188,19 @@ Bem, existem $k$ intervalos diferentes, então o loop mais externo deve levar pe
 ???
 
 E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
-Então, dado que o código em C de Insertion Sort é:
 
-``` c
-void insertion_sort(int v[], int n) {
-    for (int i = 1; i < n; i++) {   // n é o tamanho da array
-        int temp = v[i];            // para todo i de 1 a n-1
-        
-        int j;
-
-        /* Desloca todos os elementos entre j e i-1
-        para a direita, sobrescrevendo v[j] */
-
-        for (j = i; j > 0; j--) {
-            if (v[j - 1] <= temp) {
-                break;
-            }
-            v[j] = v[j - 1];
-        }
-
-        v[j] = temp;
-    }
-}
-```
+Em razão da receita obtida da [Aula 6](https://ensino.hashi.pro.br/desprog/aula6/index.html) e da implementação do Insertion Sort da [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html), a complexidade do código é $O(n^2)$ 
 
 ??? Checkpoint
-Como é possível estimar a complexidade do **Insertion Sort** a partir da receita da [Aula 6](https://ensino.hashi.pro.br/desprog/aula6/index.html)
+Com essas informações, consegue deduzir qual seria a complexidade de pior caso do Bucket Sort?
 
 ::: Gabarito
-Vamos chamar de $x$ a quantidade de iterações do loop externo e vamos chamar de $y$ a quantidade de iterações de uma execução do loop interno em função de $i$.
-
-Como $i = 1 + 1*k$ e sabemos que  $i < n$ depois de $x - 1$ iterações, temos: 
-$$ x < n $$
-
-Como $j = i - 1*k$ e sabemos que $j > 0$ depois de $y - 1$ iterações, temos:
-$$y < i+1$$
-
-Os valores de $i$ ao longo do loop externo são:
-$$i = 1,2,3,....,x$$
-
-ou seja, o total de iterações de todas as execuções do loop interno é menor que 
-$$(1+1)+(2+1)+(3+1)+...+(x+1)$$
-$$= 2+3+4+...+(x+1)$$
-
-Isso é uma soma de PA com
-
-* primeiro elemento $2$;
-* último elemento $x+1$;
-* quantidade de elementos $x$,
-
-ou seja, 
-
-$$(2+x+1)*\frac{x}{2}$$
-$$(x+3)*\frac{x}{2}$$
-$$<(n+3)*\frac{n}{2}$$
-$$=\frac{n^2 + 3n}{2}$$
-
-Portanto, pelas regras de simplificação, a complexidade do código é $O(n^2)$ e, consequentemente, a complexidade do pior caso do **Bucket Sort** é $O(n^2)$ também.
-
-**Obs.:** Esse cálculo foi retirado da [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html), mas para reforçar o aprendizado colocamos ele aqui novamente.
-
+Como foi dito, a complexidade do Bucket Sort acaba dependendo diretamente do Insertion Sort, é só lembrar da situação em que todos os elementos estão concentrados em um so bucket. Desta forma, consequentemente, a complexidade do pior caso do **Bucket Sort** é $O(n^2)$ também.
 :::
 ???
 
+
 Temos ainda o caso de complexidade de **caso médio**, o qual ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada em tempo **linear** assim como no **melhor caso**.
-
-<!-- No **melhor caso**, quando os elementos são uniformemente distribuídos entre os baldes, a complexidade geral será **linear**. Nesta situação, a complexidade para fazer os baldes é **O(n)** e aquela para classificar os elementos de cada balde é **O(k)**.
-
-Já a complexidade de **caso médio** ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo **linear**.
-
-E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**. -->
 
 
 Desta maneira, os casos de complexidade podem ser resumidos de acordo com a seguinte tabela:
@@ -294,138 +237,4 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 
 :::
 ???
-
-
-??? Desafio
-Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
-
-Escreva um código em JavaScript sobre a implementação do Bucket Sort.
-
-**Obs.:** Tudo bem se não conseguir ou não souber muito bem a linguagem JavaScript, o importante é entender o passo a passo em um código de verdade!!
-
-::: Gabarito
-
-Vamos começar com o código do Insertion Sort:
-``` java
-/**
- * Insertion Sort classica, retorna 
- * null e modifica a array dada.
- */
-
-export const insertionSort = (array) => {
-    let n = array.length;                   // n é o tamanho da array
-    for(let i = 0; i < n ; i++){            // para todo i de 1 a n-1
-        let key = array[i];
-        let j = i - 1;
-
-        /* Desloca todos os elementos entre j e i-1
-        para a direita, sobrescrevendo array[j] */
-        
-        while (j >= 0 && array[j] < key){   
-                array[j+1] = array[j];      
-                j = j-1;
-        }
-
-        array[j+1] = key; 
-    }
-}
-```
-E agora faremos o Bucket Sort:
-
-``` java
-
-/**
- * Começaremos recebendo um array de números 
- * desordenados assim como foi feito na simulação: 
- */
-
-let unsorted = [77, 73, 64, 98, 94, 81, 72, 81, 83, 75];
-console.log("Unsorted array: ",unsorted);
-
-// E aqui ordenamos essa array de números:
-
-let sorted = bucketSort(unsorted, true);
-console.log("Sorted array: ", sorted);
-
-/**
- * Devido à natureza da classificação de balde, é mais difícil fazer uma
- * função de tamanho único para a classificação de balde.
- * Assim, esta função serve apenas para classificar o nosso conjunto especificado
- * 
- * @param {Array of grades} array 
- * @param {Boolean true if ascending false if descending} ascending 
- */
-
-export const bucketSortGrades = (array) => {
-    // Bucket array
-    let buckets = [
-        //Index 0 : <=70
-        [],
-        //Index 1 : 71-75
-        [],
-        //Index 2 : 76-80
-        [],
-        //Index 3 : 81-85
-        [],
-        //Index 4 : >=86
-        []
-    ];
-    
-    // Colocando dentro dos buckets
-    array.forEach(grade=> {
-        if (grade <= 70) {
-            buckets[0].push(grade);
-        }
-        else if (grade <= 75 && grade > 70){
-            buckets[1].push(grade);
-        }
-        else if (grade <= 80 && grade > 75){
-            buckets[2].push(grade);
-        }
-        else if (grade <= 85 && grade > 80){
-            buckets[3].push(grade);
-        }
-        else{
-            buckets[4].push(grade);
-        }
-    });
-    
-    /**
-     * Obs.: Uma otimização comum é nivelar a matriz de balde primeiro, em seguida,
-     * classificar toda a matriz
-     * Deixaremos essa opção comentada dado que é uma otimização
-     */
-    //let flatBucket = buckets.flat();
-    //insertionSort(flatBucket, ascending);
-    //return flatBucket;
-
-    // Agora usaremos o Insertion Sort para organizar cada balde
-    for (let i = 0 ; i < buckets.length ; i++){
-        insertionSort(buckets[i]);
-    };
-    
-    // Achatando matriz de buckets e retornando:
-    return buckets.flat();    
-}
-```
-:::
-???
-
-
-------------------------------------------------
-
-
-<!-- 
-
-
-
-Então é recomendado que nossa entrada tenha:
-
-* Intervalo conhecido;
-
-* Distribuição uniforme;
-
-O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
-
-Essa distribuição uniforme é interessante porque ela ajuda com que os elementos estejam bem distribuídos entre os baldes, evitando que a organização de um balde seja muito mais trabalhosa que outro balde. -->
 
