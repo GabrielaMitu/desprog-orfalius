@@ -54,11 +54,78 @@ Funcionamento em detalhes
 ---------
 O mais comum é o Bucket Sort implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
 
-A implementação pode ser feita em quatro passos:
-1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
-2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
-3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos.
-4. **Concatenar** os conteúdos de todos os baldes em ordem crescente.
+
+??? Checkpoint
+
+A implementação pode ser feita em quatro passos, considerando que temos apenas o array a ser ordenado e o número n de elementos:
+
+``` c
+void bucketSort (int A[], int n) {}
+```
+
+Quais seriam então os 4 passos e seus devidos pseudocódigos? 
+
+**Dica**: Reveja o passo a passo do bingo.
+
+::: Primeiro passo
+
+1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias). Pseudocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+```
+:::
+
+::: Segundo passo
+
+2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`. Psedocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento A[i] em B[n*A[i]]
+```
+
+:::
+
+::: Terceiro passo
+
+3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos. Psedocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento A[i] em B[n*A[i]]
+    Para i entre 0 e n-1:
+        ordene a lista B[i] com o INSERTION SORT
+```
+
+:::
+
+::: Quarto passo
+
+4. **Concatenar** os conteúdos de todos os baldes em ordem crescente. Psedocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento A[i] em B[n*A[i]]
+    Para i entre 0 e n-1:
+        ordene a lista B[i] com o INSERTION SORT
+    Concatene todas as listas B em ordem crescente
+}
+```
+:::
+???
+
 
 E pronto, conseguimos organizar nossos elementos! [Fácil não?](https://www.youtube.com/watch?v=WWaLxFIVX1s)
 
