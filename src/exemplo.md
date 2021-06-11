@@ -95,7 +95,7 @@ Mas qual algoritmo seria o mais indicado se o objetivo fosse a máxima eficiênc
 
 Qual das tabelas deveríamos escolher para analisar qual algoritmo é o melhor em conjunto com o bucket sort em eficiência?
 
-**Dica**: Pense na quantidade de elementos presentes em cada balde. É recomendado que essa quantidade de elementos seja grande ou pequena?
+**Observação**: O contexto que estamos utilizando nesse Handout é de buckets pequenos.
 
 ::: Gabarito
 Como queremos uma ordenação mais rápida possível dos elementos, vamos considerar a tabela da recomendação de tempo na prática. 
