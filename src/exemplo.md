@@ -4,8 +4,8 @@ Bucket Sort
 Ideia Geral do Algoritmo  
 ---------
 
-Um algoritmo de classificação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
-Existem muitos algoritmos de classificação diferentes, com vários prós e contras. Nesse Handout iremos focar no algoritmo **Bucket Sort**.
+Um algoritmo de ordenação é usado para reorganizar uma determinada matriz ou elementos de lista de acordo com um operador de comparação nos elementos. O operador de comparação é usado para decidir a nova ordem do elemento na respectiva estrutura de dados.
+Existem muitos algoritmos de ordenação diferentes, com vários prós e contras. Nesse Handout iremos focar no algoritmo **Bucket Sort**.
 
 
 Antes de pensar em como o algoritmo funciona, vamos começar com algo mais simples: 
@@ -54,40 +54,60 @@ Funcionamento em detalhes
 ---------
 O mais comum é o Bucket Sort implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
 
-A implementação pode ser feita em quatro passos:
-1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
-2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
-3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos.
-4. **Concatenar** os conteúdos de todos os baldes em ordem crescente.
+Vamos agora entender o passo a passo de seu funcionamento
 
-E pronto, conseguimos organizar nossos elementos! [Fácil não?](https://www.youtube.com/watch?v=WWaLxFIVX1s)
 
-Vamos simular a seguir o passo a passo de uma ordenação de um array de 7 elementos, com o uso de 10 baldes.
+??? Checkpoint
+Você consegue imaginar qual seria o primeiro passo para a implementação do Bucket Sort? 
 
-Teoricamente poderiamos ordenar qualquer coisa como estes 7 elementos aqui:
+A dica está no próprio nome do algoritmo.
+
+::: Gabarito
+Já que o algoritmo funciona com base na ordenação de elementos por baldes, temos que criar esses baldes!
+
+A quantidade de baldes será a mesma que o número intervalos (n) recebido como argumento da função. A maneira mais comum de criá-los é definir cada um deles como uma lista inicialmente vazia.
+
+:::
+???
+
+Bom, agora já temos os baldes criados. Falta inserir os elementos em seus respectivos baldes. A posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
+
+Vamos entender isso melhor por meio de um exemplo!
+??? Checkpoint
+
+Simule o passo a passo da separação do array de 7 elementos mostrado abaixo, com o uso de 10 baldes. 
+
+`int array[] = {13, 68, 35, 17, 92, 94, 61}`
+
+::: Gabarito
+;bucket
+
+:::
+???
+
+Por simplicidade preferimos ordenar números no exercício anterior, mas na realidade, poderiamos ordenar qualquer coisa com o Bucket Sort. Como estes 7 elementos aqui:
 ::: 7 Elementos
 
 ![](7cats.jpg)
 
 :::
-Mas por simplicidade preferimos ordenar números:
-
-;bucket
 
 
-Como exatamente ocorre essa ordenação dentro de cada balde do passo 3? 
-Podemos utilizar uma versão recursiva do Bucket Sort ou então algum outro algoritmo de ordenação.
+Agora temos nossos elementos divididos em seus respectivos intervalos. Porém ainda temos um problema! [Os elementos dentro dos baldes estão fora de ordem!](https://i.kym-cdn.com/entries/icons/original/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.png)
+
+Vamos ordená-los então! Mas como exatamente isso ocorre? 
+Podemos utilizar uma versão recursiva do Bucket Sort ou algum outro algoritmo de ordenação.
 Mas qual algoritmo seria o mais indicado se o objetivo fosse a máxima eficiência? Vamos consultar as  [tabelas de ordenação](https://ensino.hashi.pro.br/desprog/aula9/tabelas.html), para descobrir!
 
 
 ??? Checkpoint
 
-Qual das tabelas deveríamos escolher para analisar qual algoritmo é o melhor em conjunto com o bucket sort em eficiência?
+Qual das tabelas deveríamos escolher para analisar qual algoritmo é o melhor em conjunto com o bucket sort em termos de eficiência?
 
-**Dica**: Pense na quantidade de elementos presentes em cada balde. É recomendado que essa quantidade de elementos seja grande ou pequena?
+**Dica**: No contexto deste handout, estamos considerando situações em que o número de elementos em cada balde é pequeno.
 
 ::: Gabarito
-Como queremos uma ordenação mais rápida possível dos elementos, vamos considerar a tabela da recomendação de tempo na prática. 
+Como queremos a ordenação mais rápida possível dos elementos, vamos considerar a tabela da recomendação de tempo na prática. 
 
 A Tabela de de Tempo na Prática de um algoritmo com “n” **pequeno**!
 
@@ -112,16 +132,56 @@ De acordo com a tabela, apesar de existirem poucas informações relacionadas a 
 :::
 ???
 
-O que vimos até aqui?
----------
+Estamos quase no final da implementação, mas ainda falta um passo muito importante!
+Até agora temos os elementos inseridos em baldes, ordenados de forma crescente. Dentro de cada balde, os elementos também já estão na ordem correta.
 
-::: Resumão
-1. O **Bucket Sort** coloca os elementos da lista de entrada divididos em baldes, cada um representando um intervalo diferente.
 
-2. A fim de uma maior eficiência, é recomendado uma quantidade pequena de elementos em cada balde 
+??? Checkpoint
+Considerando que o objetivo do Bucket Sort é obter um vetor de saída ordenado, você consegue imaginar qual seria o passo final para sua implementação?
 
-3. **Dentro** de cada balde é usado outro algoritmo de ordenação. Pela tabela concluimos que o melhor para isso é o **Insertion Sort** quando a quantidade de elementos n é pequeno em cada balde
+(A resposta é tão simples quanto parece)
+
+::: Gabarito
+Temos que juntar tudo!
+Ou, em outras palavras, se concatenarmos os conteúdos de cada balde, teremos um vetor de saída ordenado, como desejado.
 :::
+???
+
+E pronto, conseguimos organizar nossos elementos! [Fácil não?](https://www.youtube.com/watch?v=WWaLxFIVX1s)
+
+
+
+::: Recapitulando
+O funcionamento do Bucket Sort pode ser resumido em quatro passos:
+
+1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
+2. **Inserção** dos elementos em seus respectivos baldes - na posição `md index = n * array[i]`.
+3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos.
+4. **Concatenar** os conteúdos de todos os baldes em ordem crescente.
+:::
+
+
+??? Checkpoint
+Agora que você entendeu muito bem como o Bucket Sort funciona, tente implementar um pseudocódigo deste algoritmo.
+
+
+::: Gabarito
+``` c
+void bucketSort (int Array[], int numero_baldes) {
+    Para i entre 0 e n-1:
+        faça Balde[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento Array[i] em Balde[numero_baldes * Array[i]]
+    Para i entre 0 e n-1:
+        ordene a lista Balde[i] com o INSERTION SORT
+    Concatene todas as listas Balde em ordem crescente
+}
+```
+
+:::
+???
+
+
 
 
 Complexidade
@@ -283,138 +343,4 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 
 :::
 ???
-
-
-??? Desafio
-Agora que você já conhece os pontos mais importantes deste algoritmo de ordenação, está pronto para colocá-lo em prática!
-
-Escreva um código em Java sobre a implementação do Bucket Sort.
-
-**Obs.:** Tudo bem se não conseguir ou não souber muito bem a linguagem Java, o importante é entender o passo a passo em um código de verdade!!
-
-::: Gabarito
-
-Vamos começar com o código do Insertion Sort:
-``` java
-/**
- * Insertion Sort classica, retorna 
- * null e modifica a array dada.
- */
-
-export const insertionSort = (array) => {
-    let n = array.length;                   // n é o tamanho da array
-    for(let i = 0; i < n ; i++){            // para todo i de 1 a n-1
-        let key = array[i];
-        let j = i - 1;
-
-        /* Desloca todos os elementos entre j e i-1
-        para a direita, sobrescrevendo array[j] */
-        
-        while (j >= 0 && array[j] < key){   
-                array[j+1] = array[j];      
-                j = j-1;
-        }
-
-        array[j+1] = key; 
-    }
-}
-```
-E agora faremos o Bucket Sort:
-
-``` java
-
-/**
- * Começaremos recebendo um array de números 
- * desordenados assim como foi feito na simulação: 
- */
-
-let unsorted = [77, 73, 64, 98, 94, 81, 72, 81, 83, 75];
-console.log("Unsorted array: ",unsorted);
-
-// E aqui ordenamos essa array de números:
-
-let sorted = bucketSort(unsorted, true);
-console.log("Sorted array: ", sorted);
-
-/**
- * Devido à natureza da classificação de balde, é mais difícil fazer uma
- * função de tamanho único para a classificação de balde.
- * Assim, esta função serve apenas para classificar o nosso conjunto especificado
- * 
- * @param {Array of grades} array 
- * @param {Boolean true if ascending false if descending} ascending 
- */
-
-export const bucketSortGrades = (array) => {
-    // Bucket array
-    let buckets = [
-        //Index 0 : <=70
-        [],
-        //Index 1 : 71-75
-        [],
-        //Index 2 : 76-80
-        [],
-        //Index 3 : 81-85
-        [],
-        //Index 4 : >=86
-        []
-    ];
-    
-    // Colocando dentro dos buckets
-    array.forEach(grade=> {
-        if (grade <= 70) {
-            buckets[0].push(grade);
-        }
-        else if (grade <= 75 && grade > 70){
-            buckets[1].push(grade);
-        }
-        else if (grade <= 80 && grade > 75){
-            buckets[2].push(grade);
-        }
-        else if (grade <= 85 && grade > 80){
-            buckets[3].push(grade);
-        }
-        else{
-            buckets[4].push(grade);
-        }
-    });
-    
-    /**
-     * Obs.: Uma otimização comum é nivelar a matriz de balde primeiro, em seguida,
-     * classificar toda a matriz
-     * Deixaremos essa opção comentada dado que é uma otimização
-     */
-    //let flatBucket = buckets.flat();
-    //insertionSort(flatBucket, ascending);
-    //return flatBucket;
-
-    // Agora usaremos o Insertion Sort para organizar cada balde
-    for (let i = 0 ; i < buckets.length ; i++){
-        insertionSort(buckets[i]);
-    };
-    
-    // Achatando matriz de buckets e retornando:
-    return buckets.flat();    
-}
-```
-:::
-???
-
-
-------------------------------------------------
-
-
-<!-- 
-
-
-
-Então é recomendado que nossa entrada tenha:
-
-* Intervalo conhecido;
-
-* Distribuição uniforme;
-
-O intervalo é importante porque ela é necessária na divisão de intervalos (os chamados “baldes” ou "buckets")
-
-Essa distribuição uniforme é interessante porque ela ajuda com que os elementos estejam bem distribuídos entre os baldes, evitando que a organização de um balde seja muito mais trabalhosa que outro balde. -->
 
