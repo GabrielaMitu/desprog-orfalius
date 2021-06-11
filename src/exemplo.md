@@ -52,10 +52,12 @@ Essa é a ideia fundamental do Bucket Sort. A entrada a ser ordenada, um array, 
 
 Funcionamento em detalhes
 ---------
+
 O mais comum é o Bucket Sort implementado na forma de função, que recebe um array e um número de intervalos (n) que serão utilizados para a ordenação.
 
 Vamos agora entender o passo a passo de seu funcionamento
 
+**Passo 1**
 
 ??? Checkpoint
 Você consegue imaginar qual seria o primeiro passo para a implementação do Bucket Sort? 
@@ -69,6 +71,8 @@ A quantidade de baldes será a mesma que o número intervalos (n) recebido como 
 
 :::
 ???
+
+**Passo 2**
 
 Bom, agora já temos os baldes criados. Falta inserir os elementos em seus respectivos baldes. A posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
 
@@ -92,6 +96,7 @@ Por simplicidade preferimos ordenar números no exercício anterior, mas na real
 
 :::
 
+**Passo 3**
 
 Agora temos nossos elementos divididos em seus respectivos intervalos. Porém ainda temos um problema! [Os elementos dentro dos baldes estão fora de ordem!](https://i.kym-cdn.com/entries/icons/original/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.png)
 
@@ -132,6 +137,8 @@ De acordo com a tabela, apesar de existirem poucas informações relacionadas a 
 :::
 ???
 
+**Passo 4**
+
 Estamos quase no final da implementação, mas ainda falta um passo muito importante!
 Até agora temos os elementos inseridos em baldes, ordenados de forma crescente. Dentro de cada balde, os elementos também já estão na ordem correta.
 
@@ -151,17 +158,17 @@ E pronto, conseguimos organizar nossos elementos! [Fácil não?](https://www.you
 
 
 
-::: Recapitulando
+<!-- ::: Recapitulando
 O funcionamento do Bucket Sort pode ser resumido em quatro passos:
 
 1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias).
 2. **Inserção** dos elementos em seus respectivos baldes - na posição `md index = n * array[i]`.
 3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos.
 4. **Concatenar** os conteúdos de todos os baldes em ordem crescente.
-:::
+::: -->
 
 
-??? Checkpoint
+<!-- ??? Checkpoint
 Agora que você entendeu muito bem como o Bucket Sort funciona, tente implementar um pseudocódigo deste algoritmo.
 
 
@@ -178,6 +185,77 @@ void bucketSort (int Array[], int numero_baldes) {
 }
 ```
 
+:::
+??? -->
+
+
+??? Checkpoint
+Agora que você entendeu muito bem como o Bucket Sort funciona, tente pensar nos 4 passos responsáveis pela implementação do Bucket Sort e seus devidos pseudocódigos, considerando que temos apenas o array a ser ordenado e o número n de elementos:
+
+``` c
+void bucketSort (int A[], int n) {}
+```
+
+Quais seriam então os 4 passos e seus devidos pseudocódigos? 
+
+**Dica**: Reveja o passo a passo do bingo.
+
+::: Primeiro passo
+
+1. **Criação** dos n baldes a partir do conhecimento do intervalo (inicializados como listas vazias). Pseudocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+```
+:::
+
+::: Segundo passo
+
+2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`. Psedocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento A[i] em B[n*A[i]]
+```
+
+:::
+
+::: Terceiro passo
+
+3. **Ordenar** cada balde separadamente usando o mesmo ou outros algoritmos. Psedocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento A[i] em B[n*A[i]]
+    Para i entre 0 e n-1:
+        ordene a lista B[i] com o INSERTION SORT
+```
+
+:::
+
+::: Quarto passo
+
+4. **Concatenar** os conteúdos de todos os baldes em ordem crescente. Psedocódigo:
+
+``` c
+void bucketSort (int A[], int n) {
+    Para i entre 0 e n-1:
+        faça B[i] uma lista vazia
+    Para i entre 0 e n-1:
+        insira o elemento A[i] em B[n*A[i]]
+    Para i entre 0 e n-1:
+        ordene a lista B[i] com o INSERTION SORT
+    Concatene todas as listas B em ordem crescente
+}
+```
 :::
 ???
 
@@ -237,76 +315,19 @@ Bem, existem $k$ intervalos diferentes, então o loop mais externo deve levar pe
 ???
 
 E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**.
-Então, dado que o código em C de Insertion Sort é:
 
-``` c
-void insertion_sort(int v[], int n) {
-    for (int i = 1; i < n; i++) {   // n é o tamanho da array
-        int temp = v[i];            // para todo i de 1 a n-1
-        
-        int j;
-
-        /* Desloca todos os elementos entre j e i-1
-        para a direita, sobrescrevendo v[j] */
-
-        for (j = i; j > 0; j--) {
-            if (v[j - 1] <= temp) {
-                break;
-            }
-            v[j] = v[j - 1];
-        }
-
-        v[j] = temp;
-    }
-}
-```
+Em razão da receita obtida da [Aula 6](https://ensino.hashi.pro.br/desprog/aula6/index.html) e da implementação do Insertion Sort da [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html), a complexidade do código é $O(n^2)$ 
 
 ??? Checkpoint
-Como é possível estimar a complexidade do **Insertion Sort** a partir da receita da [Aula 6](https://ensino.hashi.pro.br/desprog/aula6/index.html)
+Com essas informações, consegue deduzir qual seria a complexidade de pior caso do Bucket Sort?
 
 ::: Gabarito
-Vamos chamar de $x$ a quantidade de iterações do loop externo e vamos chamar de $y$ a quantidade de iterações de uma execução do loop interno em função de $i$.
-
-Como $i = 1 + 1*k$ e sabemos que  $i < n$ depois de $x - 1$ iterações, temos: 
-$$ x < n $$
-
-Como $j = i - 1*k$ e sabemos que $j > 0$ depois de $y - 1$ iterações, temos:
-$$y < i+1$$
-
-Os valores de $i$ ao longo do loop externo são:
-$$i = 1,2,3,....,x$$
-
-ou seja, o total de iterações de todas as execuções do loop interno é menor que 
-$$(1+1)+(2+1)+(3+1)+...+(x+1)$$
-$$= 2+3+4+...+(x+1)$$
-
-Isso é uma soma de PA com
-
-* primeiro elemento $2$;
-* último elemento $x+1$;
-* quantidade de elementos $x$,
-
-ou seja, 
-
-$$(2+x+1)*\frac{x}{2}$$
-$$(x+3)*\frac{x}{2}$$
-$$<(n+3)*\frac{n}{2}$$
-$$=\frac{n^2 + 3n}{2}$$
-
-Portanto, pelas regras de simplificação, a complexidade do código é $O(n^2)$ e, consequentemente, a complexidade do pior caso do **Bucket Sort** é $O(n^2)$ também.
-
-**Obs.:** Esse cálculo foi retirado da [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html), mas para reforçar o aprendizado colocamos ele aqui novamente.
-
+Como foi dito, a complexidade do Bucket Sort acaba dependendo diretamente do Insertion Sort, é só lembrar da situação em que todos os elementos estão concentrados em um so bucket. Desta forma, consequentemente, a complexidade do pior caso do **Bucket Sort** é $O(n^2)$ também.
 :::
 ???
 
+
 Temos ainda o caso de complexidade de **caso médio**, o qual ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada em tempo **linear** assim como no **melhor caso**.
-
-<!-- No **melhor caso**, quando os elementos são uniformemente distribuídos entre os baldes, a complexidade geral será **linear**. Nesta situação, a complexidade para fazer os baldes é **O(n)** e aquela para classificar os elementos de cada balde é **O(k)**.
-
-Já a complexidade de **caso médio** ocorre quando os elementos são distribuídos aleatóriamente no array de entrada. Mesmo que os elementos não sejam distribuídos de maneira uniforme, a classificação do intervalo é executada também em tempo **linear**.
-
-E por fim há também o **pior caso**, quando os elementos são muito próximos, de forma a serem colocados em poucos baldes, a complexidade acaba dependendo diretamente do algoritmo usado para a ordenação dentro dos baldes: o **Insertion Sort**. -->
 
 
 Desta maneira, os casos de complexidade podem ser resumidos de acordo com a seguinte tabela:
@@ -316,7 +337,6 @@ Desta maneira, os casos de complexidade podem ser resumidos de acordo com a segu
 | Melhor       |  O(n+k)  |
 | Médio        | O(n+k)   |
 | Pior         | O(n^2)   |
- 
 
 Vantagens e desvantagens
 ---------
