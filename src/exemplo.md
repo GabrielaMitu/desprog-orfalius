@@ -272,14 +272,32 @@ Vamos relembrar um pouco deste algoritmo. Você se lembra quais eram as complexi
 
 Mas você deve estar se perguntando... qual seria a vantagem da utilização do Bucket Sort se o algoritmo efetivamente usado para a ordenação tem complexidade quadrática no caso médio e no pior caso?
 
-A vantagem está justamente em seu melhor caso, que é O(n)!
+A vantagem está justamente em seu melhor caso, que é $O(n)$!
 
 Vamos entender melhor porque isso acontece.
 
-Cada balde possui n/k elementos. Considerando a complexidade do Insertion Sort, podemos concluir que cada balde terá uma complexidade quadrática em n/k. No melhor caso, o k será proporcional a n, de forma que a complexidade desta etapa seja linear.
-
+Cada balde possui $n/k$ elementos, sendo $n$ o número de elementos e $k$ o número de baldes. Considerando a complexidade do Insertion Sort, podemos concluir que cada balde terá uma complexidade quadrática em $n/k$. No melhor caso, o $k$ será proporcional a $n$, de forma que a complexidade desta etapa seja linear.
 
 Portanto, no melhor caso, a complexidade total do Bucket Sort será linear!
+
+??? Checkpoint
+Como chegamos na conclusão que cada balde tem uma complexidade $O(n/k)$, pode-se afirmar que a complexidade total do Bucket Sort seria então $O(k(n/k))$?
+
+::: Gabarito
+Não!! A razão disso é que o termo $O(n/k)$ está ocultando um fator constante. Quando se visita cada bucket/intervalo e dá uma olhada nos elementos que ele contém, não se leva exatamente $n/k$ tempo - ou mesmo algum múltiplo constante de $n/k$ tempo. Por exemplo, o que acontece se o balde estiver vazio? Nesse caso, você ainda está gastando algum tempo "olhando" para o balde, já que precisa determinar que não deve iterar sobre seus elementos. Portanto, uma representação mais precisa do tempo necessário por intervalo é algo como $c0(n/k) + c1$, onde $c0$ e $c1$ são constantes específicas da implementação.
+:::
+???
+
+Esta expressão é ainda $O(n/k)$.
+
+O ponto é o que acontece quando se multiplica essa expressão por k para obter a quantidade total de trabalho realizado:
+
+$k * (c0(n / k) + c1)$
+
+= $c0 * n + c1 * k$
+
+Portanto, o melhor caso de complexidade é: $O(n + k)$
+
 
 **{red}(Pior Caso)**
 
