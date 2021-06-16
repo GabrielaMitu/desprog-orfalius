@@ -67,7 +67,7 @@ A quantidade de baldes será a mesma que o número intervalos (n) recebido como 
 
 **Passo 2**
 
-Bom, agora já temos os baldes criados. Falta inserir os elementos em seus respectivos baldes. A posição em que o elemento do array será inserido é definida por `md index = n * array[i]`.
+Bom, agora já temos os baldes criados. Falta inserir os elementos em seus respectivos baldes. A posição em que o elemento do array será inserido é definida por `md index = (n * array[i])/máximo`.
 
 Vamos entender isso melhor por meio de um exemplo!
 ??? Checkpoint
@@ -171,7 +171,7 @@ Quais seriam então os 4 passos e seus devidos pseudocódigos?
 
 ::: Segundo passo
 
-2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = n * array[i]`. Psedocódigo:
+2. **Inserção** dos elementos em seus respectivos baldes - a posição em que o elemento do array será inserido é definida por `md index = (n * array[i])/máximo`. Psedocódigo:
 
 ``` c
     Para i entre 0 e n-1:
@@ -325,6 +325,9 @@ Desta maneira, os casos de complexidade podem ser resumidos de acordo com a segu
 | Médio        | O(n+k)   |
 | Pior         | O(n^2)   |
 
+
+::: Extras
+
 Vantagens e desvantagens
 ---------
 Até agora nós vimos o que é e como funciona o **Bucket Sort**, então com base nisso já poderiamos observar quais vantagens e desvantagens esse algoritmo tem, e não há melhor maneira que vendo seu melhor e seu pior caso.
@@ -349,5 +352,4 @@ Com o conhecimento adquirido até agora e para reforçar o aprendizado, liste **
 ![](comparacao.png)
 
 :::
-???
 
